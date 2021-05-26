@@ -76,7 +76,7 @@ def main():
     amogus = arr.astype(dtype="object")
     amogus = np.apply_along_axis(get_closest_colour, 2, amogus)
     output_size = tuple(number_tiles * np.roll(tile_size, 1))
-    frames = [Image.new("RGB", output_size) for _ in range(6)]
+    frames = [Image.new("RGBA", output_size, (0, 0, 0, 0)) for _ in range(6)]
     for offset, frame in enumerate(frames):
         for y in range(0, shape[0]):
             for x in range(0, shape[1]):
