@@ -40,7 +40,7 @@ def get_closest_colour(arg):
 @get_closest_colour.register
 @cache
 def _(arg: tuple):
-    r, g, b = arg
+    r, g, b, a = arg
     distances = {
         k: np.linalg.norm((r - k[0], g - k[1], b - k[2]))
         for k in gifs
@@ -50,14 +50,15 @@ def _(arg: tuple):
 
 @get_closest_colour.register
 def _(arg: np.ndarray):
-    tup = arg[0], arg[1], arg[2]
+    tup = arg[0], arg[1], arg[2], arg[3]
     return get_closest_colour(tup)
 
 
 def main():
     input_image = Image.open("me.png")
+    input_image.convert("RGBA")
     arr = np.array(input_image)
-    # y, x, 3 or 4
+    # y, x, 4
     shape = arr.shape
     tile_size = np.array((63, 74))
     # y, x
@@ -67,7 +68,7 @@ def main():
     # Expects width, height
     scaled_down = input_image.resize(number_tiles, resample=Image.LANCZOS)
     arr = np.array(scaled_down)
-    # y, x, 3 or 4
+    # y, x, 4
     shape = arr.shape
     yrange = np.arange(shape[0])
     xrange = np.arange(shape[1])
@@ -76,10 +77,13 @@ def main():
     amogus = arr.astype(dtype="object")
     amogus = np.apply_along_axis(get_closest_colour, 2, amogus)
     output_size = tuple(number_tiles * np.roll(tile_size, 1))
+    mask = arr[:, :, 3] > 50
     frames = [Image.new("RGBA", output_size, (0, 0, 0, 0)) for _ in range(6)]
     for offset, frame in enumerate(frames):
         for y in range(0, shape[0]):
             for x in range(0, shape[1]):
+                if not mask[y, x]:
+                    continue
                 f = (offset + phase[x, y]) % 6
                 g = amogus[y, x]
                 gif = loaded_gifs[g]
