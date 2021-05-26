@@ -7,18 +7,18 @@ from PIL import Image
 from giftools import save_transparent_gif
 
 gifs = {
-    (197, 17, 17): "amogus01.gif",
-    (19, 46, 209): "amogus02.gif",
-    (17, 127, 45): "amogus03.gif",
-    (237, 84, 186): "amogus04.gif",
-    (239, 125, 13): "amogus05.gif",
-    (245, 245, 87): "amogus06.gif",
-    (63, 71, 78): "amogus07.gif",
-    (214, 224, 240): "amogus08.gif",
-    (107, 47, 187): "amogus09.gif",
-    (113, 73, 30): "amogus10.gif",
-    # (56, 254, 220): "amogus11.gif",
-    # (80, 239, 57): "amogus12.gif",
+    # (197, 17, 17): "amogus01.gif",  # red
+    (19, 46, 209): "amogus02.gif",  # blue
+    # (17, 127, 45): "amogus03.gif",  # green
+    # (237, 84, 186): "amogus04.gif",  # pink
+    # (239, 125, 13): "amogus05.gif",  # orange
+    (245, 245, 87): "amogus06.gif",  # yellow
+    (63, 71, 78): "amogus07.gif",  # black
+    (214, 224, 240): "amogus08.gif",  # white
+    # (107, 47, 187): "amogus09.gif",  # purple
+    # (113, 73, 30): "amogus10.gif",  # brown
+    # (56, 254, 220): "amogus11.gif",  # cyan
+    # (80, 239, 57): "amogus12.gif",  # lime
 }
 
 
